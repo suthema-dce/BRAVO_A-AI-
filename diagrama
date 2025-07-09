@@ -1,0 +1,34 @@
+classDiagram
+    class Produto {
+        -string nome
+        -float valor
+    }
+
+    class ItemCarrinho {
+        -string produtoNome
+        -float valorUnitario
+        -float quantidade
+        -float subtotal
+    }
+
+    class Carrinho {
+        -List<ItemCarrinho> itens
+        +float calcularTotal()
+        +void adicionarItem(ItemCarrinho item)
+        +void removerItem(int id)
+        +void atualizarQuantidadeItem(int id, float novaQuantidade)
+        +List<ItemCarrinho> getItens()
+    }
+
+    class Pedido {
+        -string nomeCliente
+        -string enderecoEntrega
+        -string metodoPagamento
+        -string dataPedido
+        -List<ItemCarrinho> itens
+        -float valorTotal
+    }
+
+    Carrinho "1" -- "*" ItemCarrinho : contém
+    Pedido "1" -- "*" ItemCarrinho : contém
+    Produto "1" -- "0..*" ItemCarrinho : baseado em
